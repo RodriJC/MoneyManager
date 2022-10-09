@@ -1,0 +1,9 @@
+- Aplicacion de gestion economica
+
+---------------------- FASE 1 --------------------------
+- Introducir una cantidad base de dinero
+- Crear fragmento que te permita sumar y restar numeros decimales a esa cantidad base
+- Mostrar la cantiad actual
+
+---------------------- FASE 2 --------------------------
+- 

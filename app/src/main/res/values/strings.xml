@@ -1,0 +1,6 @@
+<resources>
+    <string name="app_name">CapitalManager</string>
+    <string name="base_money">Base money</string>
+    <string name="add_money">Add money</string>
+    <string name="rest_money">Rest money</string>
+</resources>
