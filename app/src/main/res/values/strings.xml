@@ -3,4 +3,8 @@
     <string name="base_money">Base money</string>
     <string name="add_money">Add money</string>
     <string name="rest_money">Rest money</string>
+    <string name="presentation">Welcome to money manager, please enter the current amount of money you have to start with.</string>
+    <string name="button_begin">Begin</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>

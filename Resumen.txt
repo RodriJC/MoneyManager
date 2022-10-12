@@ -6,4 +6,6 @@
 - Mostrar la cantiad actual
 
 ---------------------- FASE 2 --------------------------
-- 
+- Modifcar la apliación para añadir una base de datos en la que guardar los ingresos que se van realizando
+- La BD almacenará los incrementos y los decrementos del saldo
+- Estas operaciones tendrán el saldo actual, tipo de la operación la fecha de la operación, la cantidad del saldo modificado y el detalle de la operación.	
