@@ -5,10 +5,10 @@
     android:id="@+id/frameLayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".fragments.mainFragment">
+    tools:context=".fragments.initFragment">
 
     <Button
-        android:id="@+id/main_insertBase"
+        android:id="@+id/init_insertBase"
         android:layout_width="193dp"
         android:layout_height="54dp"
         android:text="Insert base money"
@@ -16,11 +16,11 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.504"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/main_baseMoney"
+        app:layout_constraintTop_toBottomOf="@+id/init_baseMoney"
         app:layout_constraintVertical_bias="0.174" />
 
     <EditText
-        android:id="@+id/main_baseMoney"
+        android:id="@+id/init_baseMoney"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:ems="10"
@@ -32,11 +32,11 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.497"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/main_presentation"
+        app:layout_constraintTop_toBottomOf="@+id/init_presentation"
         app:layout_constraintVertical_bias="0.135" />
 
     <TextView
-        android:id="@+id/main_presentation"
+        android:id="@+id/init_presentation"
         android:layout_width="399dp"
         android:layout_height="87dp"
         android:text="@string/presentation"

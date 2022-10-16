@@ -1,6 +1,7 @@
 package com.juancka.capitalmanager.db;
 
 import android.content.Context;
+import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import com.juancka.capitalmanager.db.OperationsContract.OperationsEntry;
@@ -40,10 +41,33 @@ public class DbHelper extends SQLiteOpenHelper{
         onCreate(sqLiteDatabase);
     }
 
-    public long saveTransaction(SQLiteDatabase sqld, Operation operation){
+    public long saveOperation(SQLiteDatabase sqld, Operation operation){
         return sqld.insert(OperationsEntry.TABLE_NAME, null, operation.toContentValue());
     }
 
+    /**
+     * Search all operations
+     * @return
+     */
+    public Cursor getAllOperations(){
+        return getReadableDatabase().query(
+                OperationsEntry.TABLE_NAME,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null);
+    }
 
+    /**
+     * Search last operation
+     * @return
+     */
+    public Cursor getLastOperation(SQLiteDatabase sqld){
+        return sqld.rawQuery("SELECT " + OperationsEntry.ACTUAL_MONEY + " FROM "
+                + OperationsEntry.TABLE_NAME + " ORDER BY "+ OperationsEntry.ACTUAL_MONEY
+                + " DESC LIMIT 1", null);
+    }
 
 }

@@ -17,11 +17,8 @@ import com.juancka.capitalmanager.R;
 import com.juancka.capitalmanager.db.DbHelper;
 import com.juancka.capitalmanager.model.Operation;
 
-import java.text.SimpleDateFormat;
-import java.util.Calendar;
 
-
-public class mainFragment extends Fragment {
+public class initFragment extends Fragment {
 
     // Fragment components
     private TextView presentation;
@@ -30,9 +27,10 @@ public class mainFragment extends Fragment {
 
     // Atributes
     private double initialQuantity = 0;
+    private DbHelper dbHelper;
+    private SQLiteDatabase db;
 
-
-    public mainFragment() {
+    public initFragment() {
 
     }
     @Override
@@ -40,14 +38,14 @@ public class mainFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
 
-        return inflater.inflate(R.layout.fragment_main, container, false);
+        return inflater.inflate(R.layout.fragment_init, container, false);
     }
 
     @Override
     public void onStart() {
         super.onStart();
         init();
-        inserBase();
+        insertBase();
     }
 
     /**
@@ -55,17 +53,20 @@ public class mainFragment extends Fragment {
      */
     public void init(){
         // TextView
-        this.presentation = getView().findViewById(R.id.main_presentation);
+        this.presentation = getView().findViewById(R.id.init_presentation);
         // EditText
-        this.baseMoney = getView().findViewById(R.id.main_baseMoney);
+        this.baseMoney = getView().findViewById(R.id.init_baseMoney);
         // Button
-        this.insertBase = getView().findViewById(R.id.main_insertBase);
+        this.insertBase = getView().findViewById(R.id.init_insertBase);
+        // Database
+        this.dbHelper = new DbHelper(getActivity());
+        this.db = dbHelper.getWritableDatabase();
     }
 
     /**
      * Insert quantity base and generate a first register in a BBDD
      */
-    public void inserBase(){
+    public void insertBase(){
 
         insertBase.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -74,12 +75,8 @@ public class mainFragment extends Fragment {
                 if(!baseMoney.getText().toString().equals("")){
                     initialQuantity = Double.parseDouble(baseMoney.getText().toString());
 
-                    // Database and table creation
-                    DbHelper dbHelper = new DbHelper(getActivity());
-                    SQLiteDatabase db = dbHelper.getWritableDatabase();
-
                     // Insert init operation
-                    dbHelper.saveTransaction(db, createInitialTransaction(initialQuantity));
+                    dbHelper.saveOperation(db, createInitialTransaction(initialQuantity));
                 }else{
                     Toast.makeText(getActivity(), "Insert a quantity", Toast.LENGTH_SHORT).show();
                 }
@@ -94,25 +91,8 @@ public class mainFragment extends Fragment {
      */
     private Operation createInitialTransaction(Double initialQuantity){
 
-        Operation operation = new Operation();
-        operation.setMoneyUpdate(initialQuantity);
-        operation.setActualMoney(initialQuantity);
-        operation.setOperation("INITIAL");
-        operation.setDetails("Initial money");
-        operation.setDate(currentDate());
+        return new Operation("INITIAL", initialQuantity, initialQuantity,
+                "Initial money");
 
-        return operation;
-    }
-
-    /**
-     * Generate de current date
-     * @return
-     */
-    private String currentDate(){
-        Calendar calendar = Calendar.getInstance();
-        SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy HH:mm");
-        String date = sdf.format(calendar.getTime());
-
-        return  date;
     }
 }

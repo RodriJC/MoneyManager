@@ -1,11 +1,23 @@
 - Aplicacion de gestion economica
 
 ---------------------- FASE 1 --------------------------
-- Introducir una cantidad base de dinero
-- Crear fragmento que te permita sumar y restar numeros decimales a esa cantidad base
-- Mostrar la cantiad actual
-
+- Introducir una cantidad base de dinero.
+- Mostrar la cantiad actual.
+- Control de errores en el fragmento.
 ---------------------- FASE 2 --------------------------
-- Modifcar la apliación para añadir una base de datos en la que guardar los ingresos que se van realizando
-- La BD almacenará los incrementos y los decrementos del saldo
-- Estas operaciones tendrán el saldo actual, tipo de la operación la fecha de la operación, la cantidad del saldo modificado y el detalle de la operación.	
+- Modifcar la apliación para añadir una base de datos en la que guardar los ingresos que se van realizando.
+- La BD almacenará los incrementos y los decrementos del saldo.
+- Estas operaciones tendrán el saldo actual, tipo de la operación la fecha de la operación, la cantidad del saldo modificado y el detalle de la operación.
+- Guardar la cantidad base de dinero introducido en el primer fragmento creado en la base de datos como tipo de operacion INITIAL.
+---------------------- FASE 3 --------------------------	
+- Realizamos un nuevo fragmento para que podamos guardar los incrementos y los decrementos del sueldo que tenemos.
+- Una vez creemos el fragmento la operacion +/- se tiene que guardar en la base de datos.
+- Control de errores para las cantidades a +/- en el fragmento
+---------------------- FASE 4 --------------------------
+- Creamos un nuevo fragmento para ver todas las operaciones que hemos aniadido.
+- Anadir en el fragmento un boton para ver mas detalles y otro para borrar la operacion. (Sin funcionalidad)
+---------------------- FASE 4 --------------------------
+- Creamos el fragmento para ver mas detalles.
+- Anadimos funcionalidad para el boton de borrado con confirmacion de si queremos borrar la operacion.
+- Control de errores en el fragmento.
+

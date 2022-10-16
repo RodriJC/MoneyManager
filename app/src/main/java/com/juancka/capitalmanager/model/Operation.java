@@ -4,23 +4,37 @@ import android.content.ContentValues;
 
 import com.juancka.capitalmanager.db.OperationsContract;
 
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+
 public class Operation {
 
-    // Atributtes
-    private String date;
-    private String operation;
-    private double moneyUpdate;
-    private double actualMoney;
-    private String details;
+    // ATTRIBUTES
+    private String date, operation, details;
+    private double moneyUpdate, actualMoney;
 
-    // Constructors
-    /** */
-    public Operation(){
+    // CONSTRUCTOR
+    public Operation(){}
 
+    /**
+     * Make an operation with the current date
+     * @param operation
+     * @param moneyUpdate
+     * @param actualMoney
+     * @param details
+     */
+    public Operation(String operation, double moneyUpdate, double actualMoney,
+                     String details){
+        this.date = currentDate();
+        this.operation = operation;
+        this.moneyUpdate = moneyUpdate;
+        this.actualMoney = actualMoney;
+        this.details = details;
     }
 
+
    /**
-     *
+     * Make an operation with all the attributos by parameters
      * @param date
      * @param operation
      * @param moneyUpdate
@@ -93,5 +107,16 @@ public class Operation {
         cv.put(OperationsContract.OperationsEntry.DETAIL, getDetails());
 
         return cv;
+    }
+
+    /**
+     * Generate de current date
+     * @return
+     */
+    private String currentDate(){
+        Calendar calendar = Calendar.getInstance();
+        SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy HH:mm");
+        String date = sdf.format(calendar.getTime());
+        return  date;
     }
 }
