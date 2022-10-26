@@ -12,6 +12,7 @@ public class Operation {
     // ATTRIBUTES
     private String date, operation, details;
     private double moneyUpdate, actualMoney;
+    private int _id;
 
     // CONSTRUCTOR
     public Operation(){}
@@ -51,6 +52,13 @@ public class Operation {
     }
 
     // GETTER/SETTER
+    public int getId(){
+        return _id;
+    }
+
+    public void setId(int id){
+        this._id = id;
+    }
     public String getDate() {
         return date;
     }

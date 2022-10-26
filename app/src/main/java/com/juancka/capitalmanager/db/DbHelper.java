@@ -61,7 +61,7 @@ public class DbHelper extends SQLiteOpenHelper{
     }
 
     /**
-     * Search last operation
+     * Search total money in last operation
      * @return
      */
     public Cursor getLastOperation(SQLiteDatabase sqld){
@@ -69,5 +69,4 @@ public class DbHelper extends SQLiteOpenHelper{
                 + OperationsEntry.TABLE_NAME + " ORDER BY "+ OperationsEntry.ACTUAL_MONEY
                 + " DESC LIMIT 1", null);
     }
-
 }

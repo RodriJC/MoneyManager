@@ -25,7 +25,7 @@ public class initFragment extends Fragment {
     private EditText baseMoney;
     private Button insertBase;
 
-    // Atributes
+    // Attributes
     private double initialQuantity = 0;
     private DbHelper dbHelper;
     private SQLiteDatabase db;
