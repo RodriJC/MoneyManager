@@ -79,13 +79,13 @@ public class listFragment extends Fragment {
             // Parameters of the next operation
             String date = queryOperation.getString(1);
             String typeOperation = queryOperation.getString(2);
-            Double total = queryOperation.getDouble(4);
+            Double update = queryOperation.getDouble(3);
 
             // Fill the operation
             Operation operation = new Operation();
             operation.setDate(date);
             operation.setOperation(typeOperation);
-            operation.setActualMoney(Double.parseDouble(df.format(total)));
+            operation.setMoneyUpdate(Double.parseDouble(df.format(update)));
 
             operations.add(operation);
         }
@@ -136,7 +136,7 @@ public class listFragment extends Fragment {
 
             public void show(int position){
                 this.date.setText(operations.get(position).getDate());
-                this.update.setText(String.valueOf(operations.get(position).getActualMoney()) + '€');
+                this.update.setText(String.valueOf(operations.get(position).getMoneyUpdate()) + '€');
                 this.type.setText(operations.get(position).getOperation());
             }
 

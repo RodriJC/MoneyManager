@@ -23,7 +23,7 @@ public class addFragment extends Fragment {
     // Frament Content
     private TextView title, quantityTitle, detailsTitle;
     private EditText quantity, details;
-    private Button addQuantity, removeQuantity;
+    private Button addQuantity, removeQuantity, addRemove, addArchived;
 
     // Fragment attributes
     private DbHelper dbHelper;
@@ -44,6 +44,8 @@ public class addFragment extends Fragment {
         super.onStart();
         init();
         operations();
+        toArchive();
+        removeOperations();
     }
 
     /**
@@ -60,6 +62,8 @@ public class addFragment extends Fragment {
         // Button
         this.addQuantity = getActivity().findViewById(R.id.add_addQuantity);
         this.removeQuantity = getActivity().findViewById(R.id.add_removeQuantity);
+        this.addRemove = getActivity().findViewById(R.id.add_remove);
+        this.addArchived = getActivity().findViewById(R.id.add_archived);
         // Database
         this.dbHelper = new DbHelper(getActivity());
         this.db = dbHelper.getWritableDatabase();
@@ -122,7 +126,53 @@ public class addFragment extends Fragment {
         }else { // If not exist an operation
             Toast.makeText(getActivity(), "Insert a quantity", Toast.LENGTH_SHORT).show();
         }
+    }
 
+    /**
+     * Change to list when press the archive button
+     */
+    private void toArchive(){
+        addArchived.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                toListFragment();
+            }
+        });
+    }
+
+    /**
+     * Remove the list of opretions
+     */
+    private void removeOperations(){
+        addRemove.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if(dbHelper.deleteAll() > 0){
+                    toInitFragment();
+                }
+            }
+        });
+    }
+
+    /**
+     * Go to the init fragment
+     */
+    private void toInitFragment(){
+        Fragment fragment = new initFragment();
+        getActivity().getSupportFragmentManager()
+                .beginTransaction()
+                .addToBackStack(null)
+                .replace(R.id.fragmentContainerView, fragment).commit();
+    }
+    /**
+     * Go to the list of operations fragment
+     */
+    private void toListFragment(){
+        Fragment fragment = new listFragment();
+        getActivity().getSupportFragmentManager()
+                .beginTransaction()
+                .addToBackStack(null)
+                .replace(R.id.fragmentContainerView, fragment).commit();
     }
 
 }

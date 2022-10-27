@@ -1,9 +1,12 @@
 package com.juancka.capitalmanager.fragments;
 
+import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 
 import android.view.LayoutInflater;
 import android.view.View;
@@ -44,6 +47,7 @@ public class initFragment extends Fragment {
     @Override
     public void onStart() {
         super.onStart();
+        initBD();
         init();
         insertBase();
     }
@@ -58,11 +62,18 @@ public class initFragment extends Fragment {
         this.baseMoney = getView().findViewById(R.id.init_baseMoney);
         // Button
         this.insertBase = getView().findViewById(R.id.init_insertBase);
-        // Database
-        this.dbHelper = new DbHelper(getActivity());
-        this.db = dbHelper.getWritableDatabase();
     }
 
+    public void initBD(){
+        this.dbHelper = new DbHelper(getActivity());
+        this.db = dbHelper.getWritableDatabase();
+
+        Cursor lastOperation = dbHelper.getLastOperation(db); // Last operation of the DB
+
+        if(lastOperation.moveToFirst()){
+            toAddFragment();
+        }
+    }
     /**
      * Insert quantity base and generate a first register in a BBDD
      */
@@ -74,9 +85,10 @@ public class initFragment extends Fragment {
 
                 if(!baseMoney.getText().toString().equals("")){
                     initialQuantity = Double.parseDouble(baseMoney.getText().toString());
-
                     // Insert init operation
                     dbHelper.saveOperation(db, createInitialTransaction(initialQuantity));
+                    // Next fragment
+                    toAddFragment();
                 }else{
                     Toast.makeText(getActivity(), "Insert a quantity", Toast.LENGTH_SHORT).show();
                 }
@@ -94,5 +106,12 @@ public class initFragment extends Fragment {
         return new Operation("INITIAL", initialQuantity, initialQuantity,
                 "Initial money");
 
+    }
+
+    private void toAddFragment(){
+        Fragment fragment = new addFragment();
+        getActivity().getSupportFragmentManager()
+                .beginTransaction()
+                .replace(R.id.fragmentContainerView, fragment).commit();
     }
 }

@@ -41,6 +41,21 @@ public class DbHelper extends SQLiteOpenHelper{
         onCreate(sqLiteDatabase);
     }
 
+    /**
+     * Clean the table
+     * @return
+     */
+    public int deleteAll() {
+        SQLiteDatabase db = this.getWritableDatabase();
+        return db.delete(OperationsEntry.TABLE_NAME, "1", null);
+    }
+
+    /**
+     * Save a operation
+     * @param sqld
+     * @param operation
+     * @return
+     */
     public long saveOperation(SQLiteDatabase sqld, Operation operation){
         return sqld.insert(OperationsEntry.TABLE_NAME, null, operation.toContentValue());
     }
