@@ -11,6 +11,7 @@ import androidx.fragment.app.ListFragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -71,7 +72,6 @@ public class listFragment extends Fragment {
      */
     private void obtainOperations(){
         // Cursosr that obtain all the operations
-        DecimalFormat df = new DecimalFormat("#.00");
         Cursor queryOperation = dbHelper.getAllOperations();
 
         // While exists operations
@@ -85,8 +85,7 @@ public class listFragment extends Fragment {
             Operation operation = new Operation();
             operation.setDate(date);
             operation.setOperation(typeOperation);
-            operation.setMoneyUpdate(Double.parseDouble(df.format(update)));
-
+            operation.setMoneyUpdate(update);
             operations.add(operation);
         }
 
@@ -125,6 +124,8 @@ public class listFragment extends Fragment {
 
         public class OperationAdapterHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
             TextView date, update, type;
+            DecimalFormat df = new DecimalFormat("#.00");
+
 
             public OperationAdapterHolder(@NonNull View itemView) {
                 super(itemView);
@@ -136,7 +137,8 @@ public class listFragment extends Fragment {
 
             public void show(int position){
                 this.date.setText(operations.get(position).getDate());
-                this.update.setText(String.valueOf(operations.get(position).getMoneyUpdate()) + '€');
+
+                this.update.setText(df.format(operations.get(position).getMoneyUpdate()) + '€');
                 this.type.setText(operations.get(position).getOperation());
             }
 
