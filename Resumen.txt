@@ -3,7 +3,6 @@
 ---------------------- FASE 1 --------------------------
 - Introducir una cantidad base de dinero.
 - Mostrar la cantiad actual.
-- Control de errores en el fragmento.
 ---------------------- FASE 2 --------------------------
 - Modifcar la apliación para añadir una base de datos en la que guardar los ingresos que se van realizando.
 - La BD almacenará los incrementos y los decrementos del saldo.
@@ -15,9 +14,6 @@
 - Control de errores para las cantidades a +/- en el fragmento
 ---------------------- FASE 4 --------------------------
 - Creamos un nuevo fragmento para ver todas las operaciones que hemos aniadido.
-- Anadir en el fragmento un boton para ver mas detalles y otro para borrar la operacion. (Sin funcionalidad)
----------------------- FASE 4 --------------------------
-- Creamos el fragmento para ver mas detalles.
-- Anadimos funcionalidad para el boton de borrado con confirmacion de si queremos borrar la operacion.
-- Control de errores en el fragmento.
+- Hacer que al pulsar en un elemento del fragmento nos lleve a otro de mas detalles
+
 

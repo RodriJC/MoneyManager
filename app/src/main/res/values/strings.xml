@@ -11,5 +11,6 @@
     <string name="list_item_op_type">Type:</string>
     <string name="list_item_op_update">Update:</string>
     <string name="list_item_op_date">Date:</string>
+    <string name="list_item_op_total">Total:</string>
     <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>

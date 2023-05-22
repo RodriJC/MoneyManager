@@ -5,9 +5,8 @@ import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentManager;
-import androidx.fragment.app.FragmentTransaction;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -47,8 +46,8 @@ public class initFragment extends Fragment {
     @Override
     public void onStart() {
         super.onStart();
-        initBD();
         init();
+        initBD();
         insertBase();
     }
 
@@ -62,15 +61,19 @@ public class initFragment extends Fragment {
         this.baseMoney = getView().findViewById(R.id.init_baseMoney);
         // Button
         this.insertBase = getView().findViewById(R.id.init_insertBase);
+
+        Log.d("InitFragment","[init]Componentes inicializados");
     }
 
     public void initBD(){
         this.dbHelper = new DbHelper(getActivity());
+        Log.d("InitFragment","[initBD]Creando dbHelper");
         this.db = dbHelper.getWritableDatabase();
-
+        Log.d("InitFragment","[initBD]Creando instancia de base de datos");
         Cursor lastOperation = dbHelper.getLastOperation(db); // Last operation of the DB
-
+        Log.d("InitFragment","[initBD]Obteniendo el ultimo registro");
         if(lastOperation.moveToFirst()){
+            Log.d("InitFragment","[initBD]Situamos el cursos en el primer registro si hay valor en la tabla");
             toAddFragment();
         }
     }
@@ -87,9 +90,11 @@ public class initFragment extends Fragment {
                     initialQuantity = Double.parseDouble(baseMoney.getText().toString());
                     // Insert init operation
                     dbHelper.saveOperation(db, createInitialTransaction(initialQuantity));
+                    Log.d("InitFragment","[insertBase]Insertamos el registro inicial");
                     // Next fragment
                     toAddFragment();
                 }else{
+                    Log.d("InitFragment","[insertBase]Error al introducir cantidad");
                     Toast.makeText(getActivity(), "Insert a quantity", Toast.LENGTH_SHORT).show();
                 }
             }
@@ -102,13 +107,14 @@ public class initFragment extends Fragment {
      * @return
      */
     private Operation createInitialTransaction(Double initialQuantity){
-
+        Log.d("InitFragment","[createInitialTransaction]Creamos la transaccion inicial");
         return new Operation("INITIAL", initialQuantity, initialQuantity,
                 "Initial money");
 
     }
 
     private void toAddFragment(){
+        Log.d("InitFragment","[toAddFragment]Nos vamos al fragmento de anadir");
         Fragment fragment = new addFragment();
         getActivity().getSupportFragmentManager()
                 .beginTransaction()

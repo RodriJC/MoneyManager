@@ -108,14 +108,18 @@ public class addFragment extends Fragment {
             if(lastOperation.moveToFirst()){ // If exists an operation on the DB (last operation)
                 actualQuantity = lastOperation.getDouble(0);
 
+                // Add to the current amount the added amount
                 if(type.equals("INCREMENT")) {
                     finalQuantity = actualQuantity + modifiedQuantity;
+                // Subtract the lost amount from the current amount
                 }else if(type.equals("DECREMENT")){
                     finalQuantity = actualQuantity - modifiedQuantity;
                 }else{
                     Toast.makeText(getActivity(), "Incorrect type operation",
                             Toast.LENGTH_SHORT).show();
                 }
+
+                // Save the new record in the table
                 dbHelper.saveOperation(db, new Operation(type, modifiedQuantity, finalQuantity,
                         newDetails));
 

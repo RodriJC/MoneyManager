@@ -37,7 +37,7 @@ public class OperationsCursorAdapter extends CursorAdapter {
         String stUpdate = cursor.getString(cursor.getColumnIndex(OperationsContract.OperationsEntry.MONEY_UPDATE));
         String stDate = cursor.getString(cursor.getColumnIndex(OperationsContract.OperationsEntry.DATE));
 
-        // Asign data
+        // Asigned data
         type.setText(stType);
         update.setText(stUpdate);
         date.setText(stDate);
