@@ -64,16 +64,16 @@ public class addFragment extends Fragment {
         this.removeQuantity = getActivity().findViewById(R.id.add_removeQuantity);
         this.addRemove = getActivity().findViewById(R.id.add_remove);
         this.addArchived = getActivity().findViewById(R.id.add_archived);
-        // Database
+        /* Database (Error, the same instance of the DB make errors to add or decrement quantity for second time)
         this.dbHelper = new DbHelper(getActivity());
         this.db = dbHelper.getWritableDatabase();
+         */
     }
 
     /**
      * Initialize the button's actions to save the new operations
      */
     public void operations(){
-
         addQuantity.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -94,6 +94,8 @@ public class addFragment extends Fragment {
      * @param type
      */
     private void insertOperation(String type) {
+        DbHelper dbHelper = new DbHelper(getActivity());
+        SQLiteDatabase db = dbHelper.getWritableDatabase();
 
         if(!quantity.getText().toString().equals("")){
 
@@ -123,6 +125,8 @@ public class addFragment extends Fragment {
                 dbHelper.saveOperation(db, new Operation(type, modifiedQuantity, finalQuantity,
                         newDetails));
 
+                dbHelper.close();
+
             }else{ // If the type is incorrect
                 Toast.makeText(getActivity(), "Failed to locate last register",
                         Toast.LENGTH_SHORT).show();
@@ -148,6 +152,7 @@ public class addFragment extends Fragment {
      * Remove the list of opretions
      */
     private void removeOperations(){
+        DbHelper dbHelper = new DbHelper(getActivity());
         addRemove.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
