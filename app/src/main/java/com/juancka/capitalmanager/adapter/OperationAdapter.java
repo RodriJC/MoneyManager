@@ -53,7 +53,7 @@ public class OperationAdapter extends RecyclerView.Adapter<OperationAdapter.Oper
 
     public class OperationAdapterHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
         TextView date, update, type, total, details;
-        DecimalFormat df = new DecimalFormat("#.00");
+        DecimalFormat df = new DecimalFormat("0.00");
 
 
         public OperationAdapterHolder(@NonNull View itemView) {
