@@ -123,7 +123,7 @@ public class Operation {
      */
     private String currentDate(){
         Calendar calendar = Calendar.getInstance();
-        SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy HH:mm");
+        SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy HH:mm:ss:SSS");
         String date = sdf.format(calendar.getTime());
         return  date;
     }
